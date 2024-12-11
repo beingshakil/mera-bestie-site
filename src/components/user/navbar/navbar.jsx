@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FaSearch, FaChevronDown, FaTimes, FaBars, FaUser, FaHeart, FaShoppingCart, FaGift, FaPhone, FaHome, FaStore, FaEnvelope } from "react-icons/fa";
+import { FaSearch, FaTimes, FaBars, FaUser, FaHeart, FaShoppingCart, FaGift, FaPhone, FaHome, FaStore, FaEnvelope } from "react-icons/fa";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [userName, setUserName] = useState("");
+  const [cartHasItems, setCartHasItems] = useState(false); // Track cart items
   const location = useLocation();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -44,6 +45,13 @@ export default function Navbar() {
   const handleLogout = () => {
     sessionStorage.removeItem("userId");
     window.location.reload();
+  };
+
+  const handleAddToCart = () => {
+    // Add item to cart logic...
+    
+    // Update cartHasItems to true when item is added
+    setCartHasItems(true);
   };
 
   const userId = sessionStorage.getItem("userId");
@@ -96,13 +104,21 @@ export default function Navbar() {
               >
                 <FaSearch className="w-4 h-4" />
               </button>
+          
               <Link to="/cart" className="hover:text-gray-500 flex items-center"> 
-                <FaShoppingCart className="w-4 h-4" />
+                <FaShoppingCart
+                  style={{
+                    color: cartHasItems ? '#EC4899' : 'black',// Cart icon turns pink when items are added
+                  }}
+                  size={20}
+                />
                 <span className="ml-2 hidden md:inline">Cart</span>
               </Link>
+
               <button aria-label="Wishlist" className="hover:text-gray-500 hidden md:block">
                 <FaHeart className="w-4 h-4" />
               </button>
+
               <div className="relative">
                 <button
                   aria-label="Profile"
@@ -163,12 +179,11 @@ export default function Navbar() {
                 CONTACT
               </Link>
               <Link to="/OccasionsPage" className={`hover:text-gray-200 ${isActive('/OccasionsPage') ? 'text-gray-900' : ''}`}>
-            OCCASIONS
-          </Link>
-          <Link to="/about" className={`hover:text-gray-200 ${isActive('/about') ? 'text-gray-900' : ''}`}>
-            ABOUT
-          </Link>
-          
+                OCCASIONS
+              </Link>
+              <Link to="/about" className={`hover:text-gray-200 ${isActive('/about') ? 'text-gray-900' : ''}`}>
+                ABOUT
+              </Link>
             </div>
 
             {/* Phone Number */}
