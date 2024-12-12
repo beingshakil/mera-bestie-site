@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../../components/user/navbar/navbar";
-import Footer from "../../components/user/footer/footer";
 import { motion } from "framer-motion";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -206,7 +205,6 @@ const HomePage = () => {
           </div>
         </section>
         <VisionSection />
-        <Footer />
       </div>
     </>
   );

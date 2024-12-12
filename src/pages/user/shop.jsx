@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import Navbar from "../../components/user/navbar/navbar";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -310,27 +309,6 @@ const Shop = () => {
             )}
           </div>
         </div>
-
-        {/* Footer */}
-        <footer className="bg-white py-10 text-black mt-10">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="flex flex-col items-center md:items-start">
-              <h4 className="text-2xl font-bold">MERA Bestie</h4>
-              <div className="flex space-x-6 text-2xl mt-4">
-                <FaFacebook className="cursor-pointer hover:text-pink-500" />
-                <FaInstagram className="cursor-pointer hover:text-pink-500" />
-                <FaTwitter className="cursor-pointer hover:text-pink-500" />
-              </div>
-            </div>
-            <div className="text-center md:text-right">
-              <p>
-                Contact Information
-                <br />
-                3181 Street Name, City, India
-              </p>
-            </div>
-          </div>
-        </footer>
       </div>
     </>
   );

@@ -13,28 +13,26 @@ const RecentlyViewed = () => {
   ];
 
   return (
-    <div className="bg-pink-100 p-4 md:p-6">
-      <h3 className="text-lg md:text-xl font-semibold mb-4">
+    <div className="bg-gradient-to-r from-pink-100 via-purple-100 to-pink-200 p-6 rounded-lg">
+      <h3 className="text-2xl font-semibold text-center mb-6 text-gray-800">
         Recently Viewed Products
       </h3>
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((product) => (
           <div
             key={product.id}
-            className="bg-white p-4 shadow-sm rounded-md flex flex-col items-center"
+            className="bg-white p-4 rounded-lg shadow-lg transform hover:scale-105 hover:shadow-xl transition-transform duration-300"
           >
-            <div className="w-20 h-20 md:w-24 md:h-24 bg-gray-300 rounded-md mb-2">
+            <div className="w-24 h-24 md:w-32 md:h-32 bg-gray-200 rounded-md overflow-hidden mb-4 flex justify-center items-center">
               <img
                 src={product.image}
                 alt={product.name}
-                className="w-full h-full object-cover rounded-md"
+                className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
               />
             </div>
-            <h4 className="font-medium text-sm md:text-base">
-              {product.name}
-            </h4>
-            <p className="text-gray-500 text-xs md:text-sm">
-            ₹̶𝟺̶𝟶̶𝟶̶  Rs. {product.price}
+            <h4 className="font-medium text-lg text-gray-800 mb-2">{product.name}</h4>
+            <p className="text-gray-500 text-base">
+              <span className="line-through text-gray-400 text-sm">₹̶{product.price + 50}</span> Rs. {product.price}
             </p>
           </div>
         ))}

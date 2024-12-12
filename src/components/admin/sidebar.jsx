@@ -16,6 +16,7 @@ const Sidebar = () => {
         inStockValue: 0,
         soldStockValue: 0
     });
+    const [imagePreview, setImagePreview] = useState(null); // State for image preview
     const location = useLocation();
 
     // Set initial state based on screen size and update on resize
@@ -63,6 +64,19 @@ const Sidebar = () => {
         setProductData({...productData, [name]: value});
     };
 
+    // Handle image file selection
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setProductData({ ...productData, img: reader.result });
+                setImagePreview(reader.result); // Set image preview
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     const handleSubmit = async () => {
         try {
             const response = await fetch('https://ecommercebackend-8gx8.onrender.com/create-product', {
@@ -85,6 +99,7 @@ const Sidebar = () => {
                     inStockValue: 0,
                     soldStockValue: 0
                 });
+                setImagePreview(null); // Reset image preview
             }
         } catch (error) {
             console.error('Error creating product:', error);
@@ -118,14 +133,6 @@ const Sidebar = () => {
                             name="price"
                             placeholder="Price"
                             value={productData.price}
-                            onChange={handleInputChange}
-                            className="w-full mb-3 p-2 border rounded"
-                        />
-                        <input
-                            type="text"
-                            name="img"
-                            placeholder="Image URL"
-                            value={productData.img}
                             onChange={handleInputChange}
                             className="w-full mb-3 p-2 border rounded"
                         />
@@ -177,6 +184,26 @@ const Sidebar = () => {
                             onChange={handleInputChange}
                             className="w-full mb-3 p-2 border rounded"
                         />
+                        
+                        {/* Image Upload */}
+                        <div className="mb-3">
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={handleImageChange}
+                                className="w-full p-2 border rounded"
+                            />
+                            {imagePreview && (
+                                <div className="mt-2">
+                                    <img
+                                        src={imagePreview}
+                                        alt="Preview"
+                                        className="w-full h-32 object-cover rounded"
+                                    />
+                                </div>
+                            )}
+                        </div>
+
                         <div className="flex justify-end gap-2">
                             <button
                                 onClick={() => setShowDialog(false)}
@@ -241,7 +268,7 @@ const Sidebar = () => {
                     </div>
 
                     <footer className={`text-center text-gray-500 text-sm p-4 ${isOpen ? 'block' : 'hidden'}`}>
-                        Mera Bestie Admin Dashboard © 2023
+                        Mera Bestie Admin Dashboard © 2024 
                     </footer>
                 </div>
             </div>
